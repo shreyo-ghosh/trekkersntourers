@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Trekkers and Tourers | Curated Treks & Tours</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Trekkers and Tourers offers curated treks, beach getaways and waterfall escapes with small groups, local guides and hassle-free planning." />
+  <meta name="keywords" content="Trekkers and Tourers, trekking tours, adventure travel, beach holidays, waterfall trips" />
+  <meta name="robots" content="index,follow" />
+
+  <!-- Open Graph for social sharing -->
+  <meta property="og:title" content="Trekkers and Tourers" />
+  <meta property="og:description" content="Handpicked treks and tours for small groups and curious travellers." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.example.com/" />
+  <meta property="og:image" content="IMG_6862-2.jpg" />
+
+  <!-- Basic styling -->
+  <style>
+    :root {
+      --primary: #0b7285;
+      --primary-dark: #074554;
+      --accent: #f5b301;
+      --light: #ffffff;
+      --dark: #102a43;
+      --muted: #7b8794;
+      --max-width: 1100px;
+      --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--dark);
+      background: #f3f4f6;
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(10px);
+      color: var(--light);
+    }
+
+    .nav-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0.7rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.3rem;
+      font-size: 0.95rem;
+    }
+
+    nav a {
+      position: relative;
+      padding-bottom: 0.25rem;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.2s ease-out;
+    }
+
+    nav a:hover::after,
+    nav a:focus-visible::after {
+      width: 100%;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #1f2933;
+      border-radius: 999px;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, background 0.12s ease-out;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      background: #ffc94b;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+    }
+
+    .btn-outline {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      padding: 0.48rem 1rem;
+      font-size: 0.9rem;
+      background: transparent;
+      color: var(--light);
+      cursor: pointer;
+      transition: background 0.12s ease-out, color 0.12s ease-out, border-color 0.12s ease-out;
+    }
+
+    .btn-outline:hover {
+      background: var(--light);
+      color: var(--primary-dark);
+      border-color: var(--light);
+    }
+
+    /* Mobile nav */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--light);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 720px) {
+      nav ul {
+        position: fixed;
+        inset: 3.3rem 0 auto 0;
+        background: rgba(15, 23, 42, 0.98);
+        flex-direction: column;
+        padding: 1rem 1.2rem 1.4rem;
+        gap: 1rem;
+        transform: translateY(-120%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+      }
+
+      nav ul.show {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1.5rem 1.2rem 3rem;
+    }
+
+    /* Hero section */
+    .hero {
+      margin-top: 1.3rem;
+      border-radius: 1.2rem;
+      overflow: hidden;
+      position: relative;
+      color: var(--light);
+      box-shadow: var(--shadow-soft);
+      background: radial-gradient(circle at top left, #1fb2a6, #0b7285 50%, #020617 90%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      min-height: 360px;
+    }
+
+    .hero-copy {
+      padding: 2.3rem 2.3rem 2.6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-kicker {
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      color: rgba(226, 232, 240, 0.85);
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 3vw + 0.9rem, 2.5rem);
+      line-height: 1.15;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 0.98rem;
+      max-width: 30rem;
+      color: rgba(226, 232, 240, 0.88);
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 0.4rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 1.4rem;
+      font-size: 0.8rem;
+      margin-top: 1.1rem;
+      color: rgba(226, 232, 240, 0.85);
+    }
+
+    .hero-meta span strong {
+      font-size: 0.9rem;
+    }
+
+    .hero-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.03);
+      filter: saturate(1.15) contrast(1.05);
+    }
+
+    .hero-badge {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      background: rgba(2, 6, 23, 0.82);
+      color: var(--light);
+      padding: 0.7rem 0.9rem;
+      border-radius: 0.9rem;
+      font-size: 0.75rem;
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .hero-badge strong {
+      display: block;
+      font-size: 0.85rem;
+      margin-bottom: 0.1rem;
+    }
+
+    @media (max-width: 880px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        padding: 1.6rem 1.6rem 1.9rem;
+      }
+
+      .hero-image {
+        height: 220px;
+      }
+
+      .hero-badge {
+        bottom: 0.8rem;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        border-radius: 1rem;
+      }
+
+      .hero-image {
+        height: 200px;
+      }
+    }
+
+    /* Sections */
+    section {
+      margin-top: 3rem;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .section-heading h2 {
+      font-size: 1.35rem;
+    }
+
+    .section-heading p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 30rem;
+    }
+
+    /* Experience strip */
+    .experience-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .pill-card {
+      background: #ffffff;
+      border-radius: 999px;
+      padding: 0.7rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      font-size: 0.85rem;
+    }
+
+    .pill-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(11, 114, 133, 0.08);
+      color: var(--primary-dark);
+      font-size: 0.9rem;
+    }
+
+    .pill-card strong {
+      font-size: 0.88rem;
+    }
+
+    /* Featured trips */
+    .trips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.7rem;
+    }
+
+    .trip-card {
+      background: #ffffff;
+      border-radius: 1.1rem;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .trip-img-wrap {
+      position: relative;
+      overflow: hidden;
+      max-height: 220px;
+    }
+
+    .trip-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease-out;
+    }
+
+    .trip-card:hover .trip-img-wrap img {
+      transform: scale(1.04);
+    }
+
+    .trip-tag {
+      position: absolute;
+      left: 0.9rem;
+      top: 0.9rem;
+      background: rgba(15, 23, 42, 0.82);
+      color: #e5e7eb;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .trip-body {
+      padding: 1.1rem 1.2rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      flex: 1;
+    }
+
+    .trip-body h3 {
+      font-size: 1.05rem;
+    }
+
+    .trip-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .trip-meta span strong {
+      color: var(--primary-dark);
+      font-size: 0.9rem;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.2rem;
+    }
+
+    .chip {
+      font-size: 0.76rem;
+      padding: 0.12rem 0.52rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--muted);
+      background: #f9fafb;
+    }
+
+    .trip-footer {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.8rem;
+    }
+
+    .trip-footer a {
+      color: var(--primary-dark);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .trip-footer a svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    /* Why choose us */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 2.2fr 3fr;
+      gap: 1.6rem;
+      align-items: start;
+    }
+
+    .benefits-grid p {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .benefit-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 1rem;
+    }
+
+    .benefit-card {
+      background: #ffffff;
+      border-radius: 0.95rem;
+      padding: 0.9rem 1rem;
+      box-shadow: 0 8px 20px rgba(148, 163, 184, 0.25);
+      font-size: 0.86rem;
+    }
+
+    .benefit-title {
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    /* Contact / CTA */
+    .contact-strip {
+      margin-top: 3.2rem;
+      background: radial-gradient(circle at top left, #0b7285 0, #020617 60%);
+      color: var(--light);
+      border-radius: 1.2rem;
+      padding: 1.6rem 1.6rem 1.8rem;
+      display: grid;
+      grid-template-columns: minmax(0, 2.5fr) minmax(0, 2fr);
+      gap: 1.5rem;
+      align-items: center;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .contact-strip h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-strip p {
+      font-size: 0.9rem;
+      color: #e5e7eb;
+    }
+
+    .contact-meta {
+      font-size: 0.85rem;
+      margin-top: 0.7rem;
+    }
+
+    .contact-meta span {
+      display: block;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.7rem;
+      font-size: 0.85rem;
+    }
+
+    form .full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.1rem;
+      font-weight: 500;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border-radius: 0.7rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 0.4rem 0.55rem;
+      font: inherit;
+      resize: vertical;
+      min-height: 38px;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: 2px solid rgba(245, 179, 1, 0.9);
+      outline-offset: 1px;
+      border-color: transparent;
+      background: #f9fafb;
+    }
+
+    .form-helper {
+      font-size: 0.75rem;
+      color: #cbd5f5;
+      margin-top: 0.2rem;
+    }
+
+    @media (max-width: 720px) {
+      .benefits-grid,
+      .contact-strip,
+      form {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-strip {
+        padding: 1.3rem 1.2rem 1.5rem;
+      }
+    }
+
+    footer {
+      padding: 1.8rem 1.2rem 2.2rem;
+      background: #020617;
+      color: #9ca3af;
+      margin-top: 2.5rem;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+
+    .footer-inner a {
+      color: #e5e7eb;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+  </style>
+
+  <!-- JSON-LD basic local business schema (edit values) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    "name": "Trekkers and Tourers",
+    "url": "https://www.example.com/",
+    "description": "Adventure-led treks, beach escapes and waterfall tours for small groups.",
+    "telephone": "+00-000-000-0000",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "123 Sample Street",
+      "addressLocality": "Sample City",
+      "addressRegion": "Sample State",
+      "postalCode": "000000",
+      "addressCountry": "IN"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="nav-container" aria-label="Main navigation">
+      <div class="logo">
+        Trekkers<span>&amp;</span>Tourers
+      </div>
+
+      <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false">
+        ☰
+      </button>
+
+      <nav>
+        <ul id="primary-nav">
+          <li><a href="#trips">Trips</a></li>
+          <li><a href="#why-us">Why Us</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><button class="btn-primary" type="button">Plan a Trip</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" aria-label="Trekkers and Tourers hero">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="hero-kicker">Small groups. Local stories.</div>
+          <h1>
+            Treks, beaches and waterfalls for the <span>curious traveller</span>.
+          </h1>
+          <p>
+            Trekkers and Tourers curates slow, immersive journeys—so you can chase
+            ridgelines at dawn, stroll quiet beaches by dusk and still have someone
+            else handling the logistics.
+          </p>
+          <div class="hero-cta">
+            <button class="btn-primary" type="button">Browse upcoming departures</button>
+            <button class="btn-outline" type="button">Talk to a trip specialist</button>
+          </div>
+          <div class="hero-meta">
+            <span><strong>3–12</strong> guests per group</span>
+            <span><strong>100%</strong> customizable itineraries</span>
+            <span><strong>24/7</strong> on-ground support</span>
+          </div>
+        </div>
+
+        <div class="hero-image" aria-hidden="true">
+          <!-- Hero image: beach -->
+          <img src="IMG_6862-2.jpg" alt="Golden sand beach with palm trees and travellers along the shoreline." />
+          <div class="hero-badge">
+            <strong>Goa Coastline Escape</strong>
+            4 days · Beach & culture · Easy pace
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE STRIP -->
+    <section aria-label="Highlights">
+      <div class="experience-strip">
+        <div class="pill-card">
+          <div class="pill-icon">⛰️</div>
+          <div>
+            <strong>Trail-first itineraries</strong><br />
+            Built around sunrise hikes, ridge walks and quiet lookouts.
+          </div>
+        </div>
+        <div class="pill-card">
+          <div class="pill-icon">🧭</div>
+          <div>
+            <strong>Local fixers & guides</strong><br />
+            Trusted on-ground partners at every destination you visit.
+          </div>
+        </div>
+        <div class="pill-card">
+          <div class="pill-icon">🌱</div>
+          <div>
+            <strong>Low-impact travel</strong><br />
+            Small groups, homestays and responsible experiences by design.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED TRIPS -->
+    <section id="trips" aria-label="Featured trips">
+      <div class="section-heading">
+        <h2>Featured journeys</h2>
+        <p>
+          A sample of signature routes blending treks, waterfalls and coastline. Swap
+          dates, add days or combine itineraries to match how you like to travel.
+        </p>
+      </div>
+
+      <div class="trips-grid">
+        <!-- Card 1: Beach -->
+        <article class="trip-card">
+          <div class="trip-img-wrap">
+            <img src="IMG_6862-2.jpg" loading="lazy" alt="View of a curved sandy beach with palm trees and travellers in the distance." />
+            <span class="trip-tag">Coastal escape</span>
+          </div>
+          <div class="trip-body">
+            <h3>Goa Shores: Cliffside to Coastline</h3>
+            <div class="trip-meta">
+              <span><strong>4 days</strong> · Easy</span>
+              <span>Best for sunset seekers</span>
+            </div>
+            <p>
+              Wander clifftop villages, explore hidden coves and close each day
+              with warm sand under your feet as the Arabian Sea glows gold.
+            </p>
+            <div class="chip-row">
+              <span class="chip">Beach walks</span>
+              <span class="chip">Local cafes</span>
+              <span class="chip">Sunset spots</span>
+            </div>
+            <div class="trip-footer">
+              <span>From ₹XX,XXX per person</span>
+              <a href="#contact">
+                View outline
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path fill="currentColor" d="M9.5 3L8.4 4.1 10.8 6.5H3v1.5h7.8l-2.4 2.4L9.5 11l4-4z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2: Waterfall -->
+        <article class="trip-card">
+          <div class="trip-img-wrap">
+            <img src="IMG_7226.jpg" loading="lazy" alt="Lush hillside with a waterfall cascading beside an old stone railway bridge." />
+            <span class="trip-tag">Waterfall trail</span>
+          </div>
+          <div class="trip-body">
+            <h3>Dudhsagar Falls Forest Trek</h3>
+            <div class="trip-meta">
+              <span><strong>3 days</strong> · Moderate</span>
+              <span>Best for monsoon chasers</span>
+            </div>
+            <p>
+              Follow forest tracks, railway bridges and riverside trails to reach
+              one of the region’s most iconic cascades in full flow.
+            </p>
+            <div class="chip-row">
+              <span class="chip">Railway bridge view</span>
+              <span class="chip">Forest stay</span>
+              <span class="chip">Guided trek</span>
+            </div>
+            <div class="trip-footer">
+              <span>From ₹XX,XXX per person</span>
+              <a href="#contact">
+                View outline
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path fill="currentColor" d="M9.5 3L8.4 4.1 10.8 6.5H3v1.5h7.8l-2.4 2.4L9.5 11l4-4z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3: Sunset -->
+        <article class="trip-card">
+          <div class="trip-img-wrap">
+            <img src="IMG_6950-2.jpg" loading="lazy" alt="Sun low in the sky casting a golden path across calm sea water." />
+            <span class="trip-tag">Slow travel</span>
+          </div>
+          <div class="trip-body">
+            <h3>Arabian Sea Sundown Weekender</h3>
+            <div class="trip-meta">
+              <span><strong>2 days</strong> · Relaxed</span>
+              <span>Best for short breaks</span>
+            </div>
+            <p>
+              Reset by the water with quiet mornings, lazy afternoons and
+              unhurried sunset sessions along the coast.
+            </p>
+            <div class="chip-row">
+              <span class="chip">Weekend friendly</span>
+              <span class="chip">Beachside stay</span>
+              <span class="chip">Flexible add-ons</span>
+            </div>
+            <div class="trip-footer">
+              <span>From ₹XX,XXX per person</span>
+              <a href="#contact">
+                View outline
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path fill="currentColor" d="M9.5 3L8.4 4.1 10.8 6.5H3v1.5h7.8l-2.4 2.4L9.5 11l4-4z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- WHY US -->
+    <section id="why-us" aria-label="Why travel with Trekkers and Tourers">
+      <div class="section-heading">
+        <h2>Why Trekkers and Tourers</h2>
+        <p>
+          Travel is more than ticking off viewpoints. The focus is on time-rich
+          itineraries, human connections and routes that still leave space for
+          quiet moments.
+        </p>
+      </div>
+
+      <div class="benefits-grid">
+        <div>
+          <p>
+            Every itinerary starts with trail conditions, local seasons and
+            community impact—then layers in slow mornings, optional detours and
+            good food. You choose the pace, sharing preferences and budget; the
+            team handles the rest.
+          </p>
+        </div>
+        <div class="benefit-list" aria-label="Key benefits">
+          <article class="benefit-card">
+            <div class="benefit-title">Small, flexible groups</div>
+            <p>
+              Keep departures intimate so you can adjust plans on the trail
+              without feeling rushed or crowded.
+            </p>
+          </article>
+          <article class="benefit-card">
+            <div class="benefit-title">Season-aware planning</div>
+            <p>
+              Itineraries are tuned around weather windows, water levels and
+              local festivals for richer experiences.
+            </p>
+          </article>
+          <article class="benefit-card">
+            <div class="benefit-title">End-to-end support</div>
+            <p>
+              From route selection and packing lists to last-mile transfers, the
+              team walks with you from first call to final goodbye.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / LEAD FORM -->
+    <section id="contact" aria-label="Trip enquiry">
+      <div class="contact-strip">
+        <div>
+          <h2>Start sketching your next trip</h2>
+          <p>
+            Share a rough idea—dates, region or simply how you want the trip to
+            feel. A trip specialist will respond with a draft outline within one
+            business day.
+          </p>
+          <div class="contact-meta">
+            <span>Email: hello@trekkersandtourers.com</span>
+            <span>Phone / WhatsApp: +00-000-000-0000</span>
+            <span>Office hours: Mon–Sat · 10:00–18:00 (IST)</span>
+          </div>
+        </div>
+
+        <div>
+          <form action="#" method="post">
+            <div class="full">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your full name" />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" />
+            </div>
+            <div>
+              <label for="phone">Phone / WhatsApp</label>
+              <input id="phone" name="phone" type="tel" placeholder="+00-000-000-0000" />
+            </div>
+            <div class="full">
+              <label for="destination">Preferred region</label>
+              <input id="destination" name="destination" type="text" placeholder="E.g. Western Ghats, Goa coast, open to ideas" />
+            </div>
+            <div class="full">
+              <label for="message">Trip idea & dates</label>
+              <textarea id="message" name="message" rows="3" placeholder="Tell us about your group, dates, fitness level and what a perfect day on this trip looks like."></textarea>
+              <div class="form-helper">
+                This is a sample form. Connect it to your booking or CRM tool of choice.
+              </div>
+            </div>
+            <div class="full">
+              <button class="btn-primary" type="submit">Send trip enquiry</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© <span id="year"></span> Trekkers and Tourers. All rights reserved.</span>
+      <span>
+        Registered office: 123 Sample Street, Sample City, Sample State 000000 ·
+        <a href="mailto:hello@trekkersandtourers.com">hello@trekkersandtourers.com</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    // Dynamic year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Simple mobile nav toggle
+    const navToggle = document.querySelector(".nav-toggle");
+    const navList = document.getElementById("primary-nav");
+
+    navToggle.addEventListener("click", () => {
+      const isOpen = navList.classList.toggle("show");
+      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+  </script>
+</body>
+</html>
