@@ -14,8 +14,7 @@ A curated travel booking website for treks, beach getaways, and waterfall escape
 
 - **Frontend**: HTML5, CSS3, Vanilla JavaScript
 - **Styling**: Modern CSS with CSS Variables and Flexbox/Grid
-- **Deployment**: Netlify (CI/CD from GitHub)
-- **Domain**: GoDaddy custom domain with DNS pointing to Netlify
+- **Deployment**: AWS S3 + CloudFront (CI/CD from GitHub Actions)- **Domain**: GoDaddy custom domain with DNS pointing to Netlify
 
 ## Project Structure
 
