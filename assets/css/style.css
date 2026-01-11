@@ -64,6 +64,12 @@ a {
   text-transform: uppercase;
 }
 
+.logo img {
+  height: 45px;
+  width: auto;
+  display: block;
+}
+
 .main-nav ul {
   display: flex;
   gap: 1.5rem;
