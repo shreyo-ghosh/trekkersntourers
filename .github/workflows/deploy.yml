@@ -27,10 +27,24 @@ jobs:
         with:
           name: dist
           path: dist/
+            test-code-quality:
+                runs-on: ubuntu-latest
+                    needs: build-and-test
+                        steps:
+                              - uses: actions/checkout@v3
+                                    - name: Setup Node.js
+                                            uses: actions/setup-node@v3
+                                                    with:
+                                                              node-version: '18'
+                                                                    - name: Install dependencies
+                                                                            run: npm install
+                                                                                  - name: Run ESLint for code quality check
+                                                                                          run: npm run lint
+                                                                                          
           retention-days: 1
 
   deploy-to-aws:
-    needs: build-and-test
+    needs: buineeds: [build-and-test, test-code-quality]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
@@ -53,15 +67,9 @@ jobs:
         run: |
           aws s3 sync dist/ s3://${{ secrets.S3_BUCKET_NAME }} --delete
       
-      - name: Invalidate CloudFront cache
+      - name: Invalidate CloudFront cache      - name: Deployment Summary
         run: |
-          aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
-            --paths "/*"
-      
-      - name: Deployment Summary
-        run: |
-          echo "✅ Successfully deployed to AWS S3"
-          echo "📦 S3 Bucket: ${{ secrets.S3_BUCKET_NAME }}"
-          echo "🌍 CloudFront Distribution: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}"
-          echo "🔗 Website: https://trekkersntourers.com
+          echo "Successfully deployed to AWS S3"
+          echo "S3 Bucket: ${{ secrets.S3_BUCKET_NAME }}"
+          echo "CloudFront Distribution: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}"
+          echo "Website: https://trekkersntourers.com"
