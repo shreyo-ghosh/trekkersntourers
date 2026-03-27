@@ -72,7 +72,7 @@ This project is configured for automatic deployment on Netlify:
 
 **Email**: hello@trekkersntourers.com  
 **Instagram**: @trekkersntourers  
-**Location**: Bengaluru, India
+**Location**: Kolkata, India
 
 ## License
 
